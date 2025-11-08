@@ -1,0 +1,5 @@
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyDb.csproj.AssemblyReference.cache
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyDb.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyDb.AssemblyInfoInputs.cache
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyDb.AssemblyInfo.cs
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyDb.csproj.CoreCompileInputs.cache

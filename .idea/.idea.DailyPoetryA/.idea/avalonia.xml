@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="DailyPoetryA/App.axaml" value="DailyPoetryA/DailyPoetryA.csproj" />
+        <entry key="DailyPoetryA/Views/MainView.axaml" value="DailyPoetryA/DailyPoetryA.csproj" />
+        <entry key="DailyPoetryA/Views/MainWindow.axaml" value="DailyPoetryA/DailyPoetryA.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

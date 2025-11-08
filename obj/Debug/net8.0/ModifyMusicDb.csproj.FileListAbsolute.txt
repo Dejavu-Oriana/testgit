@@ -1,0 +1,5 @@
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyMusicDb.csproj.AssemblyReference.cache
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyMusicDb.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyMusicDb.AssemblyInfoInputs.cache
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyMusicDb.AssemblyInfo.cs
+C:\Users\pc\Desktop\DailyPoetryA\obj\Debug\net8.0\ModifyMusicDb.csproj.CoreCompileInputs.cache
