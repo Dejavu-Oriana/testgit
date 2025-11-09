@@ -33,6 +33,12 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/AlbumView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/FavoriteView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/HomeView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/InitializationView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

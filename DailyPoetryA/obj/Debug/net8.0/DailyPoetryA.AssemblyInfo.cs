@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DailyPoetryA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5199b3baa28b4e4661072c81242cb67cd486c08c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81e0b9df1f6643cef2ebcd6167ce48ddd2d90b36")]
 [assembly: System.Reflection.AssemblyProductAttribute("DailyPoetryA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DailyPoetryA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
