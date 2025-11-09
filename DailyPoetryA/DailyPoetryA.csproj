@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
-        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,13 +14,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0"/>
+        <PackageReference Include="Avalonia" Version="11.3.6"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.3.6"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.6"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.6"/>
 
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.6"/>
+        <PackageReference Include="AvaloniaInfiniteScrolling.Control" Version="1.0.0" />
+        <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="9.6.2" />
+        <PackageReference Include="Semi.Avalonia" Version="11.2.1.10" />
+        <PackageReference Include="Xaml.Behaviors.Avalonia" Version="11.3.6.5" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-rc.2.25502.107" />
     </ItemGroup>

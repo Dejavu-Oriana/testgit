@@ -12,7 +12,7 @@ namespace DailyPoetryA.UnitTest.Helpers
             return MusicStorage.DefaultMusicDbPath;
         }
 
-        public static void RemoveDBFile(string dbPath = null)
+        public static void RemoveDBFile(string? dbPath = null)
         {
             if (string.IsNullOrEmpty(dbPath))
             {
@@ -45,7 +45,7 @@ namespace DailyPoetryA.UnitTest.Helpers
             }
         }
 
-        public static MusicStorage CreateMusicStorage(string dbPath = null)
+        public static MusicStorage CreateMusicStorage(string? dbPath = null)
         {
             if (string.IsNullOrEmpty(dbPath))
             {
@@ -61,7 +61,7 @@ namespace DailyPoetryA.UnitTest.Helpers
             return musicStorage;
         }
 
-        public static async System.Threading.Tasks.Task<MusicStorage> CreateAndInitializeMusicStorageAsync(string dbPath = null)
+        public static async System.Threading.Tasks.Task<MusicStorage> CreateAndInitializeMusicStorageAsync(string? dbPath = null)
         {
             var musicStorage = CreateMusicStorage(dbPath);
             await musicStorage.InitializeAsync();

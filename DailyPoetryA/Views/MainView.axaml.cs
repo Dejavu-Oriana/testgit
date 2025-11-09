@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using DailyPoetryA.Library.ViewModels;
-using DailyPoetryA.Services;
 
 namespace DailyPoetryA.Views;
 
