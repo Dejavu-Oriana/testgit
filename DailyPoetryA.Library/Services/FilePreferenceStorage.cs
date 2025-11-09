@@ -1,29 +1,30 @@
-// using DailyPoetryA.Library.Helpers;
+using DailyPoetryA.Library.Helpers;
+using System.IO;
 
-// namespace DailyPoetryA.Library.Services;
+namespace DailyPoetryA.Library.Services;
 
-// public class FilePreferenceStorage : IPreferenceStorage {
-//     public void Set(string key, int value) => 
-//         Set(key, value.ToString());
+public class PreferenceStorage : IPreferenceStorage {
+    public void Set(string key, int value) => 
+        Set(key, value.ToString());
 
-//     public int Get(string key, int defaultValue) =>
-//         int.TryParse(Get(key, string.Empty), out var result)
-//             ? result
-//             : defaultValue;
+    public int Get(string key, int defaultValue) =>
+        int.TryParse(Get(key, string.Empty), out var result)
+            ? result
+            : defaultValue;
 
-//     public void Set(string key, string value) =>
-//         File.WriteAllText(PathHelper.GetLocalFilePath(key), value);
+    public void Set(string key, string value) =>
+        File.WriteAllText(PathHelper.GetLocalFilePath(key), value);
 
-//     public string Get(string key, string defaultValue) {
-//         var path = PathHelper.GetLocalFilePath(key);
-//         return File.Exists(path) ? File.ReadAllText(path) : defaultValue;
-//     }
+    public string Get(string key, string defaultValue) {
+        var path = PathHelper.GetLocalFilePath(key);
+        return File.Exists(path) ? File.ReadAllText(path) : defaultValue;
+    }
 
-//     public void Set(string key, DateTime value) => 
-//         Set(key, value.ToString());
+    public void Set(string key, DateTime value) => 
+        Set(key, value.ToString());
 
-//     public DateTime Get(string key, DateTime defaultValue) =>
-//         DateTime.TryParse(Get(key, string.Empty), out var result)
-//             ? result
-//             : defaultValue;
-// }
+    public DateTime Get(string key, DateTime defaultValue) =>
+        DateTime.TryParse(Get(key, string.Empty), out var result)
+            ? result
+            : defaultValue;
+}

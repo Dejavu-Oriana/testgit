@@ -5,9 +5,8 @@
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="450"
-             x:Class="DailyPoetryA.Views.TodayView"
-             DataContext="{Binding TodayViewModel, Source={StaticResource ServiceLocator}}">
-    <Button Content="查看详情"
-            Command="{Binding ShowDetailCommand}">
-    </Button>
+             x:Class="DailyPoetryA.Views.TodayView">
+    <Grid>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="今日诗词页面" />
+    </Grid>
 </UserControl>

@@ -7,7 +7,8 @@ public class ContentNavigationService : IContentNavigationService {
     public void NavigateTo(string view, object? parameter = null) {
         var content = view switch {
             ContentNavigationConstant.TodayDetail => ServiceLocator.Current
-                .TodayDetailViewModel,
+                .HomeViewModel,
+            "MusicDetail" => ServiceLocator.Current.HomeViewModel,
             _ => throw new Exception("Unknown view")
         };
 

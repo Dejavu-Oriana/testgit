@@ -17,7 +17,7 @@ public class PoetryStorage : IPoetryStorage {
     public static readonly string PoetryDbPath =
         PathHelper.GetLocalFilePath(DbName);
 
-    private SQLiteAsyncConnection _connection;
+    private SQLiteAsyncConnection? _connection;
 
     private SQLiteAsyncConnection connection =>
         _connection ??= new SQLiteAsyncConnection(PoetryDbPath);
@@ -33,7 +33,10 @@ public class PoetryStorage : IPoetryStorage {
             new FileStream(PoetryDbPath, FileMode.OpenOrCreate);
         await using var dbAssertStream =
             typeof(Poetry).Assembly.GetManifestResourceStream(DbName);
-        await dbAssertStream.CopyToAsync(dbFileStream);
+        
+        if (dbAssertStream != null) {
+            await dbAssertStream.CopyToAsync(dbFileStream);
+        }
 
         _preferenceStorage.Set(PoetryStorageConstant.VersionKey,
             PoetryStorageConstant.Version);

@@ -11,8 +11,6 @@ public class MainViewModel : ViewModelBase {
     public MainViewModel(IMenuNavigationService menuNavigationService) {
         _menuNavigationService = menuNavigationService;
 
-        OpenPaneCommand = new RelayCommand(OpenPane);
-        ClosePaneCommand = new RelayCommand(ClosePan);
         GoBackCommand = new RelayCommand(GoBack);
         OnMenuTappedCommand = new RelayCommand(OnMenuTapped);
     }
@@ -24,24 +22,18 @@ public class MainViewModel : ViewModelBase {
         set => SetProperty(ref _title, value);
     }
 
-    public ICommand OpenPaneCommand { get; }
 
-    public void OpenPane() => IsPaneOpen = true;
 
-    public ICommand ClosePaneCommand { get; }
-
-    public void ClosePan() => IsPaneOpen = false;
-
-    private bool _isPaneOpen;
+    private bool _isPaneOpen = true;
 
     public bool IsPaneOpen {
         get => _isPaneOpen;
-        private set => SetProperty(ref _isPaneOpen, value);
+        set => SetProperty(ref _isPaneOpen, value);
     }
 
-    private ViewModelBase _content;
+    private ViewModelBase? _content;
 
-    public ViewModelBase Content {
+    public ViewModelBase? Content {
         get => _content;
         private set => SetProperty(ref _content, value);
     }
@@ -54,7 +46,6 @@ public class MainViewModel : ViewModelBase {
         PushContent(content);
         SelectedMenuItem = MenuItem.MenuItems.First(p => p.View == view);
         Title = SelectedMenuItem.Name;
-        IsPaneOpen = false;
     }
 
     private MenuItem? _selectedMenuItem;
@@ -89,20 +80,23 @@ public class MainViewModel : ViewModelBase {
 }
 
 public class MenuItem {
-    public string View { get; private init; }
+        public required string View { get; init; }
 
-    public string Name { get; private init; }
+        public required string Name { get; init; }
 
-    private MenuItem() {
-    }
+        private MenuItem() {
+        }
 
-    public static MenuItem TodayView =>
-        new() { Name = "今日推荐", View = MenuNavigationConstant.TodayView };
+        public static MenuItem HomeView =>
+            new() { Name = "主页", View = "HomeView" };
 
-    public static MenuItem QueryView =>
-        new() { Name = "诗词搜索", View = MenuNavigationConstant.QueryView };
+        public static MenuItem AlbumView =>
+            new() { Name = "专辑墙", View = "AlbumView" };
 
-    public static IEnumerable<MenuItem> MenuItems { get; } = [
-        TodayView, QueryView
-    ];
+        public static MenuItem FavoriteView =>
+            new() { Name = "收藏", View = "FavoriteView" };
+
+        public static IEnumerable<MenuItem> MenuItems { get; } = [
+            HomeView, AlbumView, FavoriteView
+        ];
 }

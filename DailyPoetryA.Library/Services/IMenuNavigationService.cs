@@ -5,7 +5,18 @@ public interface IMenuNavigationService {
 }
 
 public static class MenuNavigationConstant {
-    public const string TodayView = nameof(TodayView);
+    /// <summary>
+    /// 主页视图
+    /// </summary>
+    public const string HomeView = "HomeView";
 
-    public const string QueryView = nameof(QueryView);
+    /// <summary>
+    /// 专辑墙视图
+    /// </summary>
+    public const string AlbumView = "AlbumView";
+    
+    /// <summary>
+    /// 收藏视图
+    /// </summary>
+    public const string FavoriteView = "FavoriteView";
 }

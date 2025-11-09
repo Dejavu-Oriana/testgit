@@ -1,5 +1,4 @@
 using System;
-using System.Security.Authentication.ExtendedProtection;
 using Avalonia;
 using Avalonia.Controls;
 using DailyPoetryA.Library.Services;
@@ -16,17 +15,10 @@ public class ServiceLocator {
 
     public static ServiceLocator Current {
         get {
-            if (_current is not null) {
-                return _current;
+            if (_current is null) {
+                _current = new ServiceLocator();
             }
-
-            if (Application.Current!.TryGetResource(nameof(ServiceLocator),
-                    out var resource) &&
-                resource is ServiceLocator serviceLocator) {
-                return _current = serviceLocator;
-            }
-
-            throw new Exception("this should not happen");
+            return _current;
         }
     }
 
@@ -42,11 +34,14 @@ public class ServiceLocator {
     public MainViewModel MainViewModel =>
         _serviceProvider.GetRequiredService<MainViewModel>();
 
-    public TodayViewModel TodayViewModel =>
-        _serviceProvider.GetRequiredService<TodayViewModel>();
-
-    public TodayDetailViewModel TodayDetailViewModel =>
-        _serviceProvider.GetRequiredService<TodayDetailViewModel>();
+    public HomeViewModel HomeViewModel =>
+        _serviceProvider.GetRequiredService<HomeViewModel>();
+    
+    public AlbumViewModel AlbumViewModel =>
+        _serviceProvider.GetRequiredService<AlbumViewModel>();
+    
+    public FavoriteViewModel FavoriteViewModel =>
+        _serviceProvider.GetRequiredService<FavoriteViewModel>();
 
     public QueryViewModel QueryViewModel =>
         _serviceProvider.GetRequiredService<QueryViewModel>();
@@ -56,10 +51,11 @@ public class ServiceLocator {
         _serviceProvider.GetRequiredService<IRootNavigationService>();
 
     public ServiceLocator() {
-        var serviceCollection = new ServiceCollection() ;
+        var serviceCollection = new ServiceCollection();
 
-
+        serviceCollection.AddSingleton<IPreferenceStorage,DailyPoetryA.Library.Services.PreferenceStorage>();
         serviceCollection.AddSingleton<IPoetryStorage, PoetryStorage>();
+        serviceCollection.AddSingleton<IMusicStorage, MusicStorage>();
 
         serviceCollection
             .AddSingleton<IRootNavigationService, RootNavigationService>();
@@ -73,9 +69,10 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<MainWindowViewModel>();
         serviceCollection.AddSingleton<InitializationViewModel>();
         serviceCollection.AddSingleton<MainViewModel>();
-        serviceCollection.AddSingleton<TodayViewModel>();
-        serviceCollection.AddSingleton<TodayDetailViewModel>();
         serviceCollection.AddSingleton<QueryViewModel>();
+        serviceCollection.AddSingleton<HomeViewModel>();
+        serviceCollection.AddSingleton<AlbumViewModel>();
+        serviceCollection.AddSingleton<FavoriteViewModel>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

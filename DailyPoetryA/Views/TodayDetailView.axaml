@@ -5,7 +5,8 @@
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="450"
-             x:Class="DailyPoetryA.Views.TodayDetailView"
-             DataContext="{Binding TodayDetailViewModel, Source={StaticResource ServiceLocator}}">
-    Welcome to Avalonia!
+             x:Class="DailyPoetryA.Views.TodayDetailView">
+    <Grid>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="诗词详情页面" />
+    </Grid>
 </UserControl>

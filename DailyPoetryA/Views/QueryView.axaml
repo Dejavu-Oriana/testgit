@@ -5,7 +5,8 @@
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="450"
-             x:Class="DailyPoetryA.Views.QueryView"
-             DataContext="{Binding QueryViewModel, Source={StaticResource ServiceLocator}}">
-    Welcome to Avalonia!
+             x:Class="DailyPoetryA.Views.QueryView">
+    <Grid>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="查询页面" />
+    </Grid>
 </UserControl>

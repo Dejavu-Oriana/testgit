@@ -10,7 +10,7 @@ namespace DailyPoetryA.Library.Services;
 public class MusicStorage : IMusicStorage
 {
     private IPreferenceStorage _preferenceStorage;
-    private SQLiteAsyncConnection _connection;
+    private SQLiteAsyncConnection? _connection;
     private string _dbPath;
     
     public const string DbName = "musicdb.sqlite3";
