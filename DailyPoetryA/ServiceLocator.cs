@@ -42,6 +42,9 @@ public class ServiceLocator {
     
     public FavoriteViewModel FavoriteViewModel =>
         _serviceProvider.GetRequiredService<FavoriteViewModel>();
+        
+    public AddAlbumViewModel AddAlbumViewModel =>
+        _serviceProvider.GetRequiredService<AddAlbumViewModel>();
 
     public QueryViewModel QueryViewModel =>
         _serviceProvider.GetRequiredService<QueryViewModel>();
@@ -73,6 +76,7 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<HomeViewModel>();
         serviceCollection.AddSingleton<AlbumViewModel>();
         serviceCollection.AddSingleton<FavoriteViewModel>();
+        serviceCollection.AddSingleton<AddAlbumViewModel>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

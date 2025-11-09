@@ -27,6 +27,12 @@ build_property.EnableGeneratedComInterfaceComImportInterop =
 [C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/AddAlbumView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/AlbumView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/InitializationView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

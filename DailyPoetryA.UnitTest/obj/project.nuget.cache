@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "8BrOkHUoEwI=",
+  "dgSpecHash": "lkZf/j2eFaU=",
   "success": true,
   "projectFilePath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pc\\.nuget\\packages\\avaloniainfinitescrolling.collection\\1.0.1\\avaloniainfinitescrolling.collection.1.0.1.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
-    "C:\\Users\\pc\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\pc\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\microsoft.net.test.sdk\\17.8.0\\microsoft.net.test.sdk.17.8.0.nupkg.sha512",
     "C:\\Users\\pc\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

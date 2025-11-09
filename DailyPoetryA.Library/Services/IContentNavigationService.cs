@@ -6,4 +6,5 @@ public interface IContentNavigationService {
 
 public static class ContentNavigationConstant {
     public const string TodayDetail = nameof(TodayDetail);
+    public const string AddAlbum = nameof(AddAlbum);
 }
