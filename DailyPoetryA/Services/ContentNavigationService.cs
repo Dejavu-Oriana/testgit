@@ -18,8 +18,17 @@ public class ContentNavigationService : IContentNavigationService {
             _ => throw new Exception("Unknown view")
         };
 
-        // 导航到专辑详情页面时不设置专辑数据，保持空白页面
+        // 导航到专辑详情页面时，将专辑参数传递给视图模型
+        if (view == ContentNavigationConstant.AlbumDetail && parameter is Album album) {
+            if (content is AlbumDetailViewModel albumDetailViewModel) {
+                albumDetailViewModel.UpdateAlbum(album);
+            }
+        }
 
-        ServiceLocator.Current.MainViewModel.PushContent(content);
+        // 检查当前内容是否已经是目标视图模型，如果是则不再重复添加，避免导航栈中出现重复项
+        var mainViewModel = ServiceLocator.Current.MainViewModel;
+        if (mainViewModel.Content != content) {
+            mainViewModel.PushContent(content);
+        }
     }
 }

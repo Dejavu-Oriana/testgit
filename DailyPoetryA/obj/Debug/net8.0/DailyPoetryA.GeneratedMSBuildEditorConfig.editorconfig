@@ -50,12 +50,3 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
-
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/QueryView.axaml]
-build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
-
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/TodayDetailView.axaml]
-build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
-
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/TodayView.axaml]
-build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

@@ -33,6 +33,9 @@ public class ServiceLocator {
 
     public MainViewModel MainViewModel =>
         _serviceProvider.GetRequiredService<MainViewModel>();
+        
+    public T GetService<T>() =>
+        _serviceProvider.GetRequiredService<T>();
 
     public HomeViewModel HomeViewModel =>
         _serviceProvider.GetRequiredService<HomeViewModel>();

@@ -17,6 +17,12 @@ public class Song
     [Column("AlbumId")]
     public string AlbumId { get; set; } = string.Empty;
     
+    [Column("IsFavorite")]
+    public bool IsFavorite { get; set; } = false;
+    
+    [Column("Record")]
+    public string Record { get; set; } = string.Empty;
+    
     [Ignore]
     public Album? Album { get; set; }
 }

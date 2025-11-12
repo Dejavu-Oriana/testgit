@@ -2,6 +2,8 @@ using DailyPoetryA.Library.Helpers;
 using DailyPoetryA.Library.Models;
 using SQLite;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -37,42 +39,23 @@ public class MusicStorage : IMusicStorage
     
     public async Task InitializeAsync()
     {
-        // 检查是否存在musicdb.sqlite3文件（类似PoetryStorage的处理方式）
-        var dbFileExists = false;
-        
-        // 尝试从程序集资源中获取数据库文件
-        await using var dbAssertStream = typeof(Album).Assembly.GetManifestResourceStream(DbName);
-        if (dbAssertStream != null)
-        {
-            // 如果资源中存在数据库文件，则复制到目标位置
-            await using var dbFileStream = new System.IO.FileStream(_dbPath, System.IO.FileMode.Create);
-            await dbAssertStream.CopyToAsync(dbFileStream);
-            dbFileExists = true;
-        }
-        // 同时检查当前目录是否存在musicdb.sqlite3文件
-        else if (System.IO.File.Exists(DbName))
-        {
-            // 如果当前目录存在数据库文件，则复制到目标位置
-            await using var sourceStream = new System.IO.FileStream(DbName, System.IO.FileMode.Open);
-            await using var destStream = new System.IO.FileStream(_dbPath, System.IO.FileMode.Create);
-            await sourceStream.CopyToAsync(destStream);
-            dbFileExists = true;
-        }
-        
-        // 如果没有找到预存的数据库文件，则创建新的数据库结构
-        if (!dbFileExists)
+        // 确保数据库文件存在
+        if (!System.IO.File.Exists(_dbPath))
         {
             // 创建数据库文件
             await using var dbFileStream = new System.IO.FileStream(_dbPath, System.IO.FileMode.Create);
             dbFileStream.Close();
-            
-            // 创建表
-            await connection.CreateTableAsync<Album>();
-            await connection.CreateTableAsync<Song>();
         }
+        
+        // 始终创建或更新表结构，这样可以确保表存在且结构正确
+        // 使用CreateTableAsync会检查表是否存在，如果不存在则创建，如果存在则更新结构
+        await connection.CreateTableAsync<Album>();
+        await connection.CreateTableAsync<Song>();
         
         // 设置版本信息
         _preferenceStorage.Set(MusicStorageConstant.VersionKey, MusicStorageConstant.Version);
+        
+        System.Console.WriteLine("MusicStorage: 数据库初始化完成，表结构已创建或更新");
     }
     
     // 专辑相关操作
@@ -83,7 +66,7 @@ public class MusicStorage : IMusicStorage
         {
             // 加载歌曲
             var songs = await GetSongsByAlbumIdAsync(id);
-            album.Songs = songs.ToList();
+            album.Songs = new ObservableCollection<Song>(songs);
         }
         return album;
     }
@@ -103,7 +86,7 @@ public class MusicStorage : IMusicStorage
         foreach (var album in albums)
         {
             var songs = await GetSongsByAlbumIdAsync(album.Id);
-            album.Songs = songs.ToList();
+            album.Songs = new ObservableCollection<Song>(songs);
         }
         
         return albums;
@@ -192,7 +175,7 @@ public class MusicStorage : IMusicStorage
         foreach (var album in albums)
         {
             var songs = await GetSongsByAlbumIdAsync(album.Id);
-            album.Songs = songs.ToList();
+            album.Songs = new ObservableCollection<Song>(songs);
         }
         
         return albums;

@@ -1,5 +1,6 @@
 using SQLite;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System;
 
 namespace DailyPoetryA.Library.Models;
@@ -26,5 +27,5 @@ public class Album
     public DateTime AddedDate { get; set; } = DateTime.Now;
     
     [Ignore]
-    public List<Song> Songs { get; set; } = new List<Song>();
+    public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 }
