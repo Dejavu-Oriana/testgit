@@ -2,6 +2,7 @@ using SQLite;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
+using Avalonia.Media.Imaging;
 
 namespace DailyPoetryA.Library.Models;
 
@@ -28,4 +29,8 @@ public class Album
     
     [Ignore]
     public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
+    
+    [Ignore]
+    public Bitmap? CoverImage { get; set; }
+    
 }

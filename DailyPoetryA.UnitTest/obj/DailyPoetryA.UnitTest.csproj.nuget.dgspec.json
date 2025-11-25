@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj": {}
+    "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj": {
+    "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
+        "projectUniqueName": "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
         "projectName": "DailyPoetryA.Library",
-        "projectPath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
+        "projectPath": "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\obj\\",
+        "outputPath": "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.Library\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[11.3.6, )"
+            },
             "AvaloniaInfiniteScrolling.Collection": {
               "target": "Package",
               "version": "[1.0.1, )"
@@ -76,14 +80,14 @@
         }
       }
     },
-    "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj": {
+    "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj",
+        "projectUniqueName": "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj",
         "projectName": "DailyPoetryA.UnitTest",
-        "projectPath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj",
+        "projectPath": "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.UnitTest\\DailyPoetryA.UnitTest.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.UnitTest\\obj\\",
+        "outputPath": "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.UnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -98,8 +102,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj": {
-                "projectPath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj"
+              "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj": {
+                "projectPath": "E:\\AvaloniaMvvm\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj"
               }
             }
           }

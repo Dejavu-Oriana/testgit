@@ -7,6 +7,34 @@
 
     <Application.Resources>
         <local:ServiceLocator x:Key="ServiceLocator" />
+        
+        <!-- 全局颜色资源 -->
+        <Color x:Key="PrimaryColor">#667eea</Color>
+        <Color x:Key="SecondaryColor">#764ba2</Color>
+        <Color x:Key="AccentColor">#2ECC71</Color>
+        <Color x:Key="DangerColor">#E74C3C</Color>
+        <Color x:Key="WarningColor">#F39C12</Color>
+        <Color x:Key="InfoColor">#3498DB</Color>
+        <Color x:Key="SuccessColor">#2ECC71</Color>
+        
+        <!-- 全局刷子资源 -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+        <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}"/>
+        <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}"/>
+        <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource InfoColor}"/>
+        <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
+        
+        <!-- 背景色 -->
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#F5F7FA"/>
+        <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#E0E0E0"/>
+        
+        <!-- 文本颜色 -->
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#2C3E50"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#7F8C8D"/>
+        <SolidColorBrush x:Key="TextTertiaryBrush" Color="#95A5A6"/>
     </Application.Resources>
 
     <Application.DataTemplates>
@@ -15,5 +43,25 @@
   
     <Application.Styles>
         <FluentTheme />
+        
+        <!-- 全局按钮样式 -->
+        <Style Selector="Button">
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        
+        <!-- 全局文本框样式 -->
+        <Style Selector="TextBox">
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+        
+        <!-- 全局边框样式 -->
+        <Style Selector="Border">
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        </Style>
     </Application.Styles>
 </Application>

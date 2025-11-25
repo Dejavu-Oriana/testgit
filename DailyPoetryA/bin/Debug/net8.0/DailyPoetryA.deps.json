@@ -816,6 +816,7 @@
       },
       "DailyPoetryA.Library/1.0.0": {
         "dependencies": {
+          "Avalonia": "11.3.6",
           "AvaloniaInfiniteScrolling.Collection": "1.0.1",
           "CommunityToolkit.Mvvm": "8.4.0",
           "sqlite-net-pcl": "1.9.172"

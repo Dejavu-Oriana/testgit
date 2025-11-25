@@ -20,33 +20,36 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DailyPoetryA
-build_property.ProjectDir = C:\Users\pc\Desktop\DailyPoetryA\DailyPoetryA\
+build_property.ProjectDir = E:\AvaloniaMvvm\DailyPoetryA\DailyPoetryA\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/App.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/AddAlbumView.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/AddAlbumView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/AlbumDetailView.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/AlbumDetailView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/AlbumView.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/AlbumView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/FavoriteView.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/FavoriteView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/HomeView.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/HomeView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/InitializationView.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/InitializationView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/MainView.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/MainView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/pc/Desktop/DailyPoetryA/DailyPoetryA/Views/MainWindow.axaml]
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[E:/AvaloniaMvvm/DailyPoetryA/DailyPoetryA/Views/StatsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

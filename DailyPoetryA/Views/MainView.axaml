@@ -3,67 +3,180 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lvm="using:DailyPoetryA.Library.ViewModels"
+             xmlns:converters="using:DailyPoetryA.Converters"
              mc:Ignorable="d"
              d:DesignWidth="800"
              d:DesignHeight="450"
              x:Class="DailyPoetryA.Views.MainView"
              x:DataType="lvm:MainViewModel">
-    <!-- 简单的两列布局 -->
-    <Grid>
+    
+    <UserControl.Styles>
+        <!-- 菜单项样式 -->
+        <Style Selector="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="8,4"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"
+                            Padding="12,10">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        
+        <Style Selector="ListBoxItem:selected /template/ Border#border">
+            <Setter Property="Background" Value="#E3F2FD"/>
+        </Style>
+        
+        <Style Selector="ListBoxItem:pointerover /template/ Border#border">
+            <Setter Property="Background" Value="#F5F5F5"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <!-- 现代化的两列布局 -->
+    <Grid Background="#FAFAFA">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="240" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- 左侧固定导航菜单 -->
-        <Grid Grid.Column="0" Background="#f0f0f0">
+        <!-- 左侧固定导航菜单 - 美化版 -->
+        <Border Grid.Column="0" 
+                Background="#FFFFFF" 
+                BorderBrush="#E0E0E0" 
+                BorderThickness="0,0,1,0"
+                BoxShadow="2 0 8 0 #20000000">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- 应用标题 - 美化版 -->
+                <Border Grid.Row="0" 
+                        Background="#667eea"
+                        Padding="20,0">
+                    <StackPanel VerticalAlignment="Center" Spacing="4">
+                        <TextBlock Text="🎵" 
+                                   FontSize="32" 
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="每日音乐" 
+                                   Foreground="#FFFFFF"
+                                   FontSize="20" 
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="Daily Music" 
+                                   Foreground="#E0E0E0"
+                                   FontSize="11" 
+                                   HorizontalAlignment="Center"
+                                   Opacity="0.9"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 菜单项，与ViewModel绑定 - 美化版 -->
+                <ListBox Grid.Row="1" 
+                         Margin="12,20,12,12"
+                         SelectedItem="{Binding SelectedMenuItem}"
+                         ItemsSource="{Binding Source={x:Static lvm:MenuItem.MenuItems}}"
+                         Tapped="OnMenuItemTapped"
+                         Background="Transparent"
+                         BorderThickness="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="lvm:MenuItem">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- 图标 -->
+                                <TextBlock Grid.Column="0" 
+                                           FontSize="18" 
+                                           Margin="0,0,12,0"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding Name, Converter={x:Static converters:MenuItemIconConverter.Instance}}"/>
+                                
+                                <!-- 菜单名称 -->
+                                <TextBlock Grid.Column="1" 
+                                           Text="{Binding Name}"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"
+                                           Foreground="#333333"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <!-- 底部信息 -->
+                <Border Grid.Row="2" 
+                        Background="#F8F9FA" 
+                        Padding="16,12"
+                        BorderBrush="#E0E0E0" 
+                        BorderThickness="0,1,0,0">
+                    <TextBlock Text="v1.0.0" 
+                               FontSize="11" 
+                               Foreground="#999999"
+                               HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- 右侧内容区域 - 美化版 -->
+        <Grid Grid.Column="1" Background="#F5F7FA">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="64" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- 应用标题 -->
-            <Grid Grid.Row="0">
-                <Label Foreground="#3498DB"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="20"
-                       Content="每日诗词" />
-            </Grid>
-
-            <!-- 菜单项，与ViewModel绑定 -->
-            <ListBox Grid.Row="1" Margin="0,20,0,0"
-                     SelectedItem="{Binding SelectedMenuItem}"
-                     ItemsSource="{Binding Source={x:Static lvm:MenuItem.MenuItems}}"
-                     Tapped="OnMenuItemTapped">
-                <ListBox.ItemTemplate>
-                    <DataTemplate x:DataType="lvm:MenuItem">
-                        <Label Content="{Binding Name}"
-                               FontSize="16"
-                               Margin="20,10,10,10" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
-
-        <!-- 右侧内容区域 -->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!-- 顶部标题栏 -->
-            <Grid Grid.Row="0" Background="#3498DB">
-                <Label Foreground="#ffffff"
-                       VerticalAlignment="Center"
-                       FontSize="20"
-                       Margin="10,0,0,0"
-                       Content="{Binding Title}" />
-            </Grid>
+            <!-- 顶部标题栏 - 美化版 -->
+            <Border Grid.Row="0" 
+                    Background="#FFFFFF"
+                    BorderBrush="#E0E0E0" 
+                    BorderThickness="0,0,0,1"
+                    BoxShadow="0 2 4 0 #10000000">
+                <Grid Margin="24,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding Title}" 
+                               Foreground="#2C3E50"
+                               FontSize="22" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"/>
+                    
+                    <!-- 返回按钮（如果有历史记录） -->
+                    <Button Grid.Column="1"
+                            Content="← 返回"
+                            Command="{Binding GoBackCommand}"
+                            Width="90"
+                            Height="36"
+                            Background="#95A5A6"
+                            Foreground="White"
+                            VerticalAlignment="Center"
+                            IsVisible="{Binding ContentStack.Count, Converter={x:Static converters:CountToVisibilityConverter.Instance}}"
+                            CornerRadius="6"
+                            FontSize="13"/>
+                </Grid>
+            </Border>
 
             <!-- 主内容区域，与ViewModel的Content属性绑定 -->
-            <ContentControl Grid.Row="1" Background="#ffffff"
+            <ContentControl Grid.Row="1" 
+                            Background="#F5F7FA"
                             Content="{Binding Content}">
             </ContentControl>
         </Grid>

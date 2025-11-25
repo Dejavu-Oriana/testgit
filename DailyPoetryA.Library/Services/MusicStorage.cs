@@ -145,7 +145,9 @@ public class MusicStorage : IMusicStorage
     
     public async Task DeleteSongAsync(string songId)
     {
-        await connection.DeleteAsync<Song>(songId);
+        System.Console.WriteLine($"删除歌曲: ID={songId}, 数据库路径={_dbPath}");
+        int rowsAffected = await connection.DeleteAsync<Song>(songId);
+        System.Console.WriteLine($"删除歌曲结果: 受影响行数={rowsAffected}");
     }
     
     public async Task DeleteSongsByAlbumIdAsync(string albumId)
