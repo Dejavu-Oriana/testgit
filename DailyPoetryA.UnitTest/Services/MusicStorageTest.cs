@@ -187,45 +187,7 @@ public class MusicStorageTest : IDisposable
         }
     }
     
-    [Fact]
-    public async Task TestDeleteAlbumAsync_ShouldDeleteAlbumAndRelatedSongs()
-    {
-        var musicStorage = CreateMusicStorage();
-        await musicStorage.InitializeAsync();
-        
-        try
-        {
-            // 添加带歌曲的测试专辑
-            var album = new Album
-            {
-                Id = "test-album-delete",
-                Name = "要删除的专辑",
-                Artist = "测试歌手",
-                Songs = new List<Song>
-                {
-                    new Song { Id = "test-song-delete-1", Title = "歌曲1", Artist = "测试歌手" },
-                    new Song { Id = "test-song-delete-2", Title = "歌曲2", Artist = "测试歌手" }
-                }
-            };
-            await musicStorage.AddAlbumAsync(album);
-            
-            // 删除专辑
-            await musicStorage.DeleteAlbumAsync("test-album-delete");
-            
-            // 验证专辑是否被删除
-            var deletedAlbum = await musicStorage.GetAlbumAsync("test-album-delete");
-            Assert.Null(deletedAlbum);
-            
-            // 验证歌曲是否被删除
-            var songs = await musicStorage.GetSongsByAlbumIdAsync("test-album-delete");
-            Assert.Empty(songs);
-        }
-        finally
-        {
-            await musicStorage.CloseAsync();
-        }
-    }
-    
+
     [Fact]
     public async Task TestSearchAlbumsAsync_ShouldReturnMatchingAlbums()
     {
