@@ -19,4 +19,9 @@ public static class MenuNavigationConstant {
     /// 收藏视图
     /// </summary>
     public const string FavoriteView = "FavoriteView";
+
+    /// <summary>
+    /// 数据概览视图
+    /// </summary>
+    public const string StatsView = "StatsView";
 }

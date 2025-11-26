@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using DailyPoetryA.Library.Services;
 
+
 namespace DailyPoetryA.Library.ViewModels;
 
 public class MainViewModel : ViewModelBase {
@@ -13,9 +14,11 @@ public class MainViewModel : ViewModelBase {
 
         GoBackCommand = new RelayCommand(GoBack);
         OnMenuTappedCommand = new RelayCommand(OnMenuTapped);
+        
+        SelectedMenuItem = MenuItem.HomeView;
     }
 
-    private string _title = "DailyPoetryA";
+    private string _title = "MusicApp";
 
     public string Title {
         get => _title;
@@ -46,6 +49,20 @@ public class MainViewModel : ViewModelBase {
         PushContent(content);
         SelectedMenuItem = MenuItem.MenuItems.First(p => p.View == view);
         Title = SelectedMenuItem.Name;
+        
+        // 当导航到不同界面时，自动刷新对应数据
+        if (content is HomeViewModel homeViewModel)
+        {
+            _ = homeViewModel.LoadStatisticsAsync();
+        }
+        else if (content is FavoriteViewModel favoriteViewModel)
+        {
+            _ = favoriteViewModel.LoadFavoriteSongsAsync();
+        }
+        else if (content is StatsViewModel statsViewModel)
+        {
+            _ = statsViewModel.LoadStatsAsync();
+        }
     }
 
     private MenuItem? _selectedMenuItem;
@@ -76,6 +93,20 @@ public class MainViewModel : ViewModelBase {
 
         ContentStack.RemoveAt(ContentStack.Count - 1);
         Content = ContentStack[^1];
+        
+        // 根据返回的视图模型类型执行相应的刷新操作
+        if (Content is AlbumViewModel albumViewModel) {
+            albumViewModel.RefreshAlbumsCommand.Execute(null);
+        }
+        else if (Content is HomeViewModel homeViewModel) {
+            _ = homeViewModel.LoadStatisticsAsync();
+        }
+        else if (Content is FavoriteViewModel favoriteViewModel) {
+            _ = favoriteViewModel.LoadFavoriteSongsAsync();
+        }
+        else if (Content is StatsViewModel statsViewModel) {
+            _ = statsViewModel.LoadStatsAsync();
+        }
     }
 }
 
@@ -88,15 +119,18 @@ public class MenuItem {
         }
 
         public static MenuItem HomeView =>
-            new() { Name = "主页", View = "HomeView" };
+            new() { Name = "主页", View = MenuNavigationConstant.HomeView };
 
         public static MenuItem AlbumView =>
-            new() { Name = "专辑墙", View = "AlbumView" };
+            new() { Name = "专辑墙", View = MenuNavigationConstant.AlbumView };
 
         public static MenuItem FavoriteView =>
-            new() { Name = "收藏", View = "FavoriteView" };
+            new() { Name = "收藏", View = MenuNavigationConstant.FavoriteView };
+
+        public static MenuItem StatsView =>
+            new() { Name = "数据概览", View = MenuNavigationConstant.StatsView };
 
         public static IEnumerable<MenuItem> MenuItems { get; } = [
-            HomeView, AlbumView, FavoriteView
+            HomeView, AlbumView, FavoriteView, StatsView
         ];
 }

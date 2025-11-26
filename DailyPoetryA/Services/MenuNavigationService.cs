@@ -13,6 +13,8 @@ public class MenuNavigationService : IMenuNavigationService {
                 .AlbumViewModel,
             MenuNavigationConstant.FavoriteView => ServiceLocator.Current
                 .FavoriteViewModel,
+            MenuNavigationConstant.StatsView => ServiceLocator.Current
+                .StatsViewModel,
             _ => throw new Exception("Unknown view")
         };
 

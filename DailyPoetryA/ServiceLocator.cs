@@ -52,6 +52,9 @@ public class ServiceLocator {
     public AlbumDetailViewModel AlbumDetailViewModel =>
         _serviceProvider.GetRequiredService<AlbumDetailViewModel>();
 
+    public StatsViewModel StatsViewModel =>
+        _serviceProvider.GetRequiredService<StatsViewModel>();
+
     public QueryViewModel QueryViewModel =>
         _serviceProvider.GetRequiredService<QueryViewModel>();
 
@@ -65,6 +68,7 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<IPreferenceStorage,DailyPoetryA.Library.Services.PreferenceStorage>();
         serviceCollection.AddSingleton<IPoetryStorage, PoetryStorage>();
         serviceCollection.AddSingleton<IMusicStorage, MusicStorage>();
+        serviceCollection.AddSingleton<DailyPoetryA.Library.Services.IFileDialogService, Services.FileDialogService>();
 
         serviceCollection
             .AddSingleton<IRootNavigationService, RootNavigationService>();
@@ -84,6 +88,7 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<FavoriteViewModel>();
         serviceCollection.AddSingleton<AddAlbumViewModel>();
         serviceCollection.AddSingleton<AlbumDetailViewModel>();
+        serviceCollection.AddSingleton<StatsViewModel>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }
