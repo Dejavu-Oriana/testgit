@@ -33,6 +33,17 @@ public partial class App : Application {
                 Log("Creating MainWindow...");
                 desktop.MainWindow = new MainWindow();
                 Log("MainWindow created");
+                
+                // 应用启动时设置初始内容为HomeViewModel
+                try {
+                    Log("Setting initial content to HomeViewModel...");
+                    var mainViewModel = ServiceLocator.Current.MainViewModel;
+                    var homeViewModel = ServiceLocator.Current.HomeViewModel;
+                    mainViewModel.SetMenuAndContent("HomeView", homeViewModel);
+                    Log("Initial content set successfully");
+                } catch (Exception ex) {
+                    Log($"Error setting initial content: {ex.Message}\n{ex.StackTrace}");
+                }
             }
 
             base.OnFrameworkInitializationCompleted();
