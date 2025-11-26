@@ -382,19 +382,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pc\\.nuget\\packages\\": {}
+    "C:\\Users\\shang\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
+      "projectUniqueName": "C:\\Users\\shang\\Desktop\\V2\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
       "projectName": "DailyPoetryA.Library",
-      "projectPath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
-      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pc\\Desktop\\DailyPoetryA\\DailyPoetryA.Library\\obj\\",
+      "projectPath": "C:\\Users\\shang\\Desktop\\V2\\DailyPoetryA\\DailyPoetryA.Library\\DailyPoetryA.Library.csproj",
+      "packagesPath": "C:\\Users\\shang\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\shang\\Desktop\\V2\\DailyPoetryA\\DailyPoetryA.Library\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\shang\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -452,7 +452,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\shang\\.dotnet\\sdk\\8.0.414/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

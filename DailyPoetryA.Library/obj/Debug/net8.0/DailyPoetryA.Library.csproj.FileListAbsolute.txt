@@ -34,3 +34,15 @@ C:\Users\pc\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoet
 C:\Users\pc\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\refint\DailyPoetryA.Library.dll
 C:\Users\pc\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.pdb
 C:\Users\pc\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\ref\DailyPoetryA.Library.dll
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\bin\Debug\net8.0\DailyPoetryA.Library.deps.json
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\bin\Debug\net8.0\DailyPoetryA.Library.dll
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\bin\Debug\net8.0\DailyPoetryA.Library.pdb
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.csproj.AssemblyReference.cache
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.AssemblyInfoInputs.cache
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.AssemblyInfo.cs
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.csproj.CoreCompileInputs.cache
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.dll
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\refint\DailyPoetryA.Library.dll
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\DailyPoetryA.Library.pdb
+C:\Users\shang\Desktop\DailyPoetryA\DailyPoetryA.Library\obj\Debug\net8.0\ref\DailyPoetryA.Library.dll
