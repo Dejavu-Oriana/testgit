@@ -3,6 +3,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using DailyPoetryA.Library.Services;
 
+
 namespace DailyPoetryA.Library.ViewModels;
 
 public class MainViewModel : ViewModelBase {
@@ -13,9 +14,12 @@ public class MainViewModel : ViewModelBase {
 
         GoBackCommand = new RelayCommand(GoBack);
         OnMenuTappedCommand = new RelayCommand(OnMenuTapped);
+
+        // 程序启动时将主页标记为选择状态
+        SelectedMenuItem = MenuItem.HomeView;
     }
 
-    private string _title = "DailyPoetryA";
+    private string _title = "MusicApp";
 
     public string Title {
         get => _title;

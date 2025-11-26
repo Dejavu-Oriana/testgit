@@ -29,3 +29,4 @@ public class Album
     [Ignore]
     public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 }
+
