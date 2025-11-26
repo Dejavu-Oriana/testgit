@@ -1,0 +1,163 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DailyPoetryA.Library.ViewModels"
+             xmlns:models="using:DailyPoetryA.Library.Models"
+             xmlns:converters="using:DailyPoetryA.Converters"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="DailyPoetryA.Views.FavoriteView"
+             x:DataType="vm:FavoriteViewModel">
+    
+    <Grid Background="#F5F7FA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 顶部工具栏 -->
+        <Border Grid.Row="0" 
+                Background="#FFFFFF" 
+                BorderBrush="#E0E0E0" 
+                BorderThickness="0,0,0,1"
+                Padding="24,16"
+                BoxShadow="0 2 4 0 #10000000">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+                    <TextBlock Text="⭐" FontSize="24" VerticalAlignment="Center"/>
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="我的收藏" 
+                                   FontSize="22" 
+                                   FontWeight="Bold"
+                                   Foreground="#2C3E50"/>
+                        <TextBlock Text="{Binding FavoriteSongs.Count, StringFormat='共 {0} 首收藏歌曲'}" 
+                                   FontSize="13" 
+                                   Foreground="#7F8C8D"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button Grid.Column="1"
+                        Content="🔄 刷新"
+                        Command="{Binding RefreshCommand}"
+                        Width="100"
+                        Height="36"
+                        Background="#3498DB"
+                        Foreground="White"
+                        CornerRadius="6"
+                        FontSize="13"
+                        VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- 收藏列表 -->
+        <ScrollViewer Grid.Row="1" 
+                      Padding="24" 
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="12">
+                <!-- 空状态提示 -->
+                <Border Background="#FFFFFF"
+                        CornerRadius="10"
+                        Padding="48"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1"
+                        IsVisible="{Binding FavoriteSongs.Count, Converter={x:Static converters:EmptyToVisibilityConverter.Instance}}"
+                        HorizontalAlignment="Stretch">
+                    <StackPanel Spacing="16" HorizontalAlignment="Center">
+                        <TextBlock Text="⭐" FontSize="64" HorizontalAlignment="Center" Opacity="0.3"/>
+                        <TextBlock Text="还没有收藏的歌曲" 
+                                   FontSize="18" 
+                                   FontWeight="SemiBold"
+                                   Foreground="#7F8C8D"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="去专辑墙添加一些喜欢的歌曲吧！" 
+                                   FontSize="14" 
+                                   Foreground="#95A5A6"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 收藏歌曲列表 -->
+                <ItemsControl ItemsSource="{Binding FavoriteSongs}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="models:Song">
+                            <Border Background="#FFFFFF"
+                                    CornerRadius="8"
+                                    Padding="20"
+                                    Margin="0,0,0,12"
+                                    BorderBrush="#E0E0E0"
+                                    BorderThickness="1"
+                                    BoxShadow="0 2 6 0 #10000000">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- 歌曲图标 -->
+                                    <Border Grid.Column="0"
+                                            Width="56"
+                                            Height="56"
+                                            CornerRadius="8"
+                                            Margin="0,0,16,0"
+                                            BorderBrush="#f1aeb0"
+                                            BorderThickness="1"
+                                            Background="#FFF5F5"
+                                            ClipToBounds="True">
+                                        <Grid>
+                                            <Image Source="{Binding Album.CoverImage}"
+                                                   Stretch="UniformToFill"
+                                                   IsVisible="{Binding Album.CoverImage, 
+                                                   Converter={x:Static converters:NullToBoolConverter.Instance}}"/>
+                                            <TextBlock Text="🎵" 
+                                                       FontSize="24" 
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="#f5576c"
+                                                       IsVisible="{Binding Album.CoverImage, 
+                                                       Converter={x:Static converters:NullToBoolConverter.Instance}, ConverterParameter='Invert'}"/>
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- 歌曲信息 -->
+                                    <StackPanel Grid.Column="1" Spacing="6" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Title}" 
+                                                   FontSize="16" 
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#2C3E50"/>
+                                        <TextBlock FontSize="14" Foreground="#7F8C8D">
+                                        <Run Text="艺术家: "/>
+                                        <Run Text="{Binding Artist}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="12" Foreground="#95A5A6" Margin="0,4,0,0">
+                                        <Run Text="专辑: "/>
+                                        <Run Text="{Binding Album.Name, FallbackValue='未知专辑'}"/>
+                                    </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- 收藏标记 -->
+                                    <StackPanel Grid.Column="2" 
+                                                Orientation="Horizontal" 
+                                                VerticalAlignment="Center"
+                                                Spacing="8">
+                                        <TextBlock Text="⭐" 
+                                                   FontSize="20" 
+                                                   Opacity="0.8"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

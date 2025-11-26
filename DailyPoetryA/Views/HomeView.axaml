@@ -1,0 +1,175 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DailyPoetryA.Library.ViewModels"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="DailyPoetryA.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="24">
+        <StackPanel Spacing="24" MaxWidth="1200" HorizontalAlignment="Center">
+            
+            <!-- 欢迎横幅 -->
+            <Border Background="#667eea"
+                    CornerRadius="12"
+                    Padding="32,24"
+                    BoxShadow="0 4 12 0 #40000000">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="欢迎使用每日音乐" 
+                               FontSize="28" 
+                               FontWeight="Bold"
+                               Foreground="#FFFFFF"/>
+                    <TextBlock Text="记录你的音乐收藏，发现更多精彩内容" 
+                               FontSize="14" 
+                               Foreground="#E0E0E0"
+                               Opacity="0.9"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 统计卡片 -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 专辑统计卡片 -->
+                <Border Grid.Column="0"
+                        Background="#FFFFFF"
+                        CornerRadius="10"
+                        Padding="24"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1"
+                        BoxShadow="0 2 8 0 #10000000">
+                    <StackPanel Spacing="12" HorizontalAlignment="Center">
+                        <TextBlock Text="💿" FontSize="40" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding AlbumCount, StringFormat='{}{0}'}" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="#667eea"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="专辑" 
+                                   FontSize="16" 
+                                   Foreground="#666666"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 歌曲统计卡片 -->
+                <Border Grid.Column="2"
+                        Background="#FFFFFF"
+                        CornerRadius="10"
+                        Padding="24"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1"
+                        BoxShadow="0 2 8 0 #10000000">
+                    <StackPanel Spacing="12" HorizontalAlignment="Center">
+                        <TextBlock Text="🎵" FontSize="40" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding SongCount, StringFormat='{}{0}'}" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="#2ECC71"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="歌曲" 
+                                   FontSize="16" 
+                                   Foreground="#666666"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 收藏统计卡片 -->
+                <Border Grid.Column="4"
+                        Background="#FFFFFF"
+                        CornerRadius="10"
+                        Padding="24"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1"
+                        BoxShadow="0 2 8 0 #10000000">
+                    <StackPanel Spacing="12" HorizontalAlignment="Center">
+                        <TextBlock Text="⭐" FontSize="40" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding FavoriteCount, StringFormat='{}{0}'}" 
+                                   FontSize="32" 
+                                   FontWeight="Bold"
+                                   Foreground="#F39C12"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="收藏" 
+                                   FontSize="16" 
+                                   Foreground="#666666"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- 快速操作 -->
+            <Border Background="#FFFFFF"
+                    CornerRadius="10"
+                    Padding="24"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="1"
+                    BoxShadow="0 2 8 0 #10000000">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="快速操作" 
+                               FontSize="20" 
+                               FontWeight="Bold"
+                               Foreground="#2C3E50"/>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Content="📚 浏览专辑"
+                                Height="50"
+                                Background="#667eea"
+                                Foreground="#FFFFFF"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                CornerRadius="8"
+                                Click="NavigateToAlbumView"/>
+
+                        <Button Grid.Column="2"
+                                Content="⭐ 我的收藏"
+                                Height="50"
+                                Background="#f5576c"
+                                Foreground="#FFFFFF"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                CornerRadius="8"
+                                Click="NavigateToFavoriteView"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- 提示信息 -->
+            <Border Background="#FFF9E6"
+                    CornerRadius="8"
+                    Padding="16"
+                    BorderBrush="#FFE082"
+                    BorderThickness="1">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock Text="💡" FontSize="20" VerticalAlignment="Center"/>
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="使用提示" 
+                                   FontSize="14" 
+                                   FontWeight="Bold"
+                                   Foreground="#F57C00"/>
+                        <TextBlock Text="点击左侧菜单可以快速切换页面，在专辑墙中可以管理你的音乐收藏" 
+                                   FontSize="12" 
+                                   Foreground="#E65100"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

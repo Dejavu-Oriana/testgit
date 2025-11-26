@@ -1,0 +1,200 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DailyPoetryA.Library.ViewModels"
+             xmlns:models="clr-namespace:DailyPoetryA.Library.Models;assembly=DailyPoetryA.Library"
+             mc:Ignorable="d"
+             d:DesignWidth="1000"
+             d:DesignHeight="650"
+             x:Class="DailyPoetryA.Views.StatsView"
+             x:DataType="vm:StatsViewModel">
+
+    <Grid Background="#F5F7FA" Margin="18">
+        <StackPanel Spacing="16" MaxWidth="1100" HorizontalAlignment="Center">
+            <TextBlock Text="数据概览"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Foreground="#1F2937"/>
+
+            <Grid ColumnDefinitions="*,*,*"
+                  ColumnSpacing="16">
+                <Border Background="#0F172A"
+                        CornerRadius="14"
+                        Padding="20"
+                        BoxShadow="0 10 24 0 #15000000">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="专辑总数"
+                                   Foreground="#CBD5F5"
+                                   FontSize="13"/>
+                        <TextBlock Text="{Binding AlbumCount}"
+                                   FontSize="30"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#1D4ED8"
+                        CornerRadius="14"
+                        Padding="20"
+                        BoxShadow="0 10 24 0 #15000000">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="歌曲总数"
+                                   Foreground="#DBEAFE"
+                                   FontSize="13"/>
+                        <TextBlock Text="{Binding SongCount}"
+                                   FontSize="30"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#0EA5E9"
+                        CornerRadius="14"
+                        Padding="20"
+                        BoxShadow="0 10 24 0 #15000000">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="收藏歌曲"
+                                   Foreground="#E0F2FE"
+                                   FontSize="13"/>
+                        <TextBlock Text="{Binding FavoriteSongCount}"
+                                   FontSize="30"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,2*"
+                  ColumnSpacing="16">
+                <Border Background="#FFFFFF"
+                        CornerRadius="12"
+                        Padding="20"
+                        BorderBrush="#E3E7EF"
+                        BorderThickness="1">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Stretch">
+                            <TextBlock Text="最近新增"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1F2937"/>
+                            <Button Content="刷新"
+                                    Command="{Binding RefreshCommand}"
+                                    Width="80"
+                                    Height="32"
+                                    Margin="12,0,0,0"
+                                    Background="#2563EB"
+                                    Foreground="White"
+                                    CornerRadius="8"/>
+                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding RecentAlbums}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="models:Album">
+                                    <Border Padding="12"
+                                            Margin="0,0,0,8"
+                                            Background="#F1F5F9"
+                                            CornerRadius="10">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="15"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#0F172A"/>
+                                            <TextBlock Text="{Binding Artist}"
+                                                       FontSize="13"
+                                                       Foreground="#475569"/>
+                                            <TextBlock Text="{Binding AddedDate, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                                       FontSize="12"
+                                                       Foreground="#94A3B8"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Grid.Column="1"
+                            Spacing="16">
+                    <Border Background="#FFFFFF"
+                            CornerRadius="12"
+                            Padding="20"
+                            BorderBrush="#E3E7EF"
+                            BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Text="最活跃艺术家"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1F2937"/>
+                            <TextBlock Text="{Binding TopArtistName}"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#0F172A"
+                                       Margin="0,8,0,0"/>
+                            <TextBlock Text="{Binding TopArtistSongCount, StringFormat='歌曲数量：{0}'}"
+                                       FontSize="13"
+                                       Foreground="#64748B"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#FFFFFF"
+                            CornerRadius="12"
+                            Padding="20"
+                            BorderBrush="#E3E7EF"
+                            BorderThickness="1">
+                        <StackPanel Spacing="6">
+                            <TextBlock Text="歌曲最多的专辑"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1F2937"/>
+                            <TextBlock Text="{Binding MostSongsAlbum.Name, FallbackValue=暂无数据}"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="#0F172A"/>
+                            <TextBlock Text="{Binding MostSongsAlbum.Artist}"
+                                       FontSize="13"
+                                       Foreground="#64748B"/>
+                            <TextBlock Text="{Binding MostSongsAlbum.Songs.Count, FallbackValue=0, StringFormat='歌曲：{0} 首'}"
+                                       FontSize="13"
+                                       Foreground="#94A3B8"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#FFFFFF"
+                            CornerRadius="12"
+                            Padding="20"
+                            BorderBrush="#E3E7EF"
+                            BorderThickness="1">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="收藏歌曲预览"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1F2937"/>
+                            <ItemsControl ItemsSource="{Binding FavoriteSongsPreview}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Song">
+                                        <Border Padding="8"
+                                                Margin="0,0,0,6"
+                                                Background="#F8FAFC"
+                                                CornerRadius="8">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Title}"
+                                                           FontSize="14"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#0F172A"/>
+                                                <TextBlock Text="{Binding Artist}"
+                                                           FontSize="12"
+                                                           Foreground="#64748B"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
+
