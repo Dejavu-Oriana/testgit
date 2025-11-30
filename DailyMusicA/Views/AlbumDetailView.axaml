@@ -1,0 +1,532 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DailyMusicA.Library.ViewModels"
+             xmlns:models="using:DailyMusicA.Library.Models"
+             xmlns:converters="using:DailyMusicA.Converters"
+             mc:Ignorable="d"
+             d:DesignWidth="1000"
+             d:DesignHeight="700"
+             x:Class="DailyMusicA.Views.AlbumDetailView"
+             x:DataType="vm:AlbumDetailViewModel">
+
+    <Grid Background="#F5F7FA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 顶部工具栏 -->
+        <Border Grid.Row="0" 
+                Background="#FFFFFF" 
+                BorderBrush="#E0E0E0" 
+                BorderThickness="0,0,0,1"
+                BoxShadow="0 2 4 0 #10000000">
+            <Grid Margin="24,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 返回按钮 -->
+                <Button Grid.Column="0"
+                        Content="← 返回"
+                        Command="{Binding BackCommand}"
+                        Width="100"
+                        Height="36"
+                        Background="#95A5A6"
+                        Foreground="White"
+                        CornerRadius="6"
+                        FontSize="13"
+                        VerticalAlignment="Center"/>
+
+                <!-- 标题 -->
+                <TextBlock Grid.Column="1"
+                           Text="编辑专辑"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="#2C3E50"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+
+                <!-- 操作按钮 -->
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            Spacing="8"
+                            VerticalAlignment="Center">
+                    <Button Content="删除"
+                            Command="{Binding DeleteCommand}"
+                            Width="90"
+                            Height="36"
+                            Background="#E74C3C"
+                            Foreground="White"
+                            CornerRadius="6"
+                            FontSize="13"/>
+                    <Button Content="重置"
+                            Command="{Binding ResetCommand}"
+                            Width="90"
+                            Height="36"
+                            Background="#95A5A6"
+                            Foreground="White"
+                            CornerRadius="6"
+                            FontSize="13"/>
+                    <Button Content="保存"
+                            Command="{Binding SaveCommand}"
+                            Width="90"
+                            Height="36"
+                            Background="#3498DB"
+                            Foreground="White"
+                            CornerRadius="6"
+                            FontSize="13"
+                            FontWeight="SemiBold"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 主内容区域 -->
+        <ScrollViewer Grid.Row="1" 
+                      Padding="24" 
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="20" MaxWidth="1000" HorizontalAlignment="Center">
+                
+                <!-- 加载提示 -->
+                <Border Background="#E3F2FD"
+                        CornerRadius="8"
+                        Padding="16"
+                        BorderBrush="#2196F3"
+                        BorderThickness="1"
+                        IsVisible="{Binding IsLoading}">
+                    <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                        <TextBlock Text="⏳"
+                                   FontSize="20"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="正在加载专辑信息..."
+                                   FontSize="14"
+                                   Foreground="#1976D2"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 错误提示 -->
+                <Border Background="#FFEBEE"
+                        CornerRadius="8"
+                        Padding="12"
+                        BorderBrush="#EF5350"
+                        BorderThickness="1"
+                        IsVisible="{Binding ErrorMessage, Converter={x:Static converters:StringToBoolConverter.Instance}}">
+                    <TextBlock Text="{Binding ErrorMessage}"
+                               FontSize="13"
+                               Foreground="#C62828"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <!-- 空状态提示 -->
+                <Border Background="#FFFFFF"
+                        CornerRadius="10"
+                        Padding="48"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1"
+                        IsVisible="{Binding SelectedAlbum, Converter={x:Static converters:NullToVisibilityConverter.Instance}}">
+                    <StackPanel Spacing="16" HorizontalAlignment="Center">
+                        <TextBlock Text="💿"
+                                   FontSize="64"
+                                   HorizontalAlignment="Center"
+                                   Opacity="0.3"/>
+                        <TextBlock Text="未选择专辑"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Foreground="#7F8C8D"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="请从专辑墙中选择一个专辑进行编辑"
+                                   FontSize="14"
+                                   Foreground="#95A5A6"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 专辑编辑表单 -->
+                <Border Background="#FFFFFF"
+                        CornerRadius="10"
+                        Padding="24"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1"
+                        BoxShadow="0 2 8 0 #10000000"
+                        IsVisible="{Binding SelectedAlbum, Converter={x:Static converters:NullToBoolConverter.Instance}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="280"/>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 左侧：封面区域 -->
+                        <StackPanel Grid.Column="0" Spacing="12">
+                            <TextBlock Text="封面预览"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="#2C3E50"/>
+                            
+                            <Border Width="240"
+                                    Height="240"
+                                    CornerRadius="8"
+                                    BorderBrush="#E0E0E0"
+                                    BorderThickness="1"
+                                    Background="#F5F5F5">
+                                <Grid>
+                                    <Image Source="{Binding CoverImage}"
+                                           Stretch="UniformToFill"
+                                           IsVisible="{Binding CoverImage,
+                                            Converter={x:Static converters:NullToBoolConverter.Instance}}"/>
+                                    <TextBlock Text="暂无封面"
+                                               FontSize="14"
+                                               Foreground="#95A5A6"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               IsVisible="{Binding CoverImage, 
+                                               Converter={x:Static converters:NullToBoolConverter.Instance}, ConverterParameter='Invert'}"/>
+                                </Grid>
+                            </Border>
+                            
+                            <Button Content="选择封面"
+                                    Command="{Binding PickCoverCommand}"
+                                    Width="240"
+                                    Height="36"
+                                    Background="#2ECC71"
+                                    Foreground="White"
+                                    CornerRadius="6"
+                                    FontSize="13"/>
+                            
+                            <TextBlock Text="支持 URL 或本地文件"
+                                       FontSize="11"
+                                       Foreground="#7F8C8D"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"/>
+                            
+                            <!-- 专辑统计信息 -->
+                            <Border Background="#F8F9FA"
+                                    CornerRadius="8"
+                                    Padding="16"
+                                    BorderBrush="#E0E0E0"
+                                    BorderThickness="1"
+                                    Margin="0,12,0,0">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="专辑信息"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"
+                                               Foreground="#2C3E50"/>
+                                    <StackPanel Spacing="6">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <TextBlock Text="ID："
+                                                       FontSize="12"
+                                                       Foreground="#7F8C8D"/>
+                                            <TextBlock Text="{Binding SelectedAlbum.Id}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#2C3E50"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <TextBlock Text="歌曲数："
+                                                       FontSize="12"
+                                                       Foreground="#7F8C8D"/>
+                                            <TextBlock Text="{Binding SelectedAlbum.Songs.Count}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#2C3E50"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <TextBlock Text="价格："
+                                                       FontSize="12"
+                                                       Foreground="#7F8C8D"/>
+                                            <TextBlock Text="{Binding SelectedAlbum.Price, StringFormat='¥{0:F2}'}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#2C3E50"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <TextBlock Text="添加日期："
+                                                       FontSize="12"
+                                                       Foreground="#7F8C8D"/>
+                                            <TextBlock Text="{Binding SelectedAlbum.AddedDate, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#2C3E50"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- 右侧：表单字段 -->
+                        <StackPanel Grid.Column="2" Spacing="16">
+                            <!-- 专辑名称 -->
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="专辑名称 *"
+                                           FontSize="12"
+                                           Foreground="#2C3E50"
+                                           FontWeight="SemiBold"/>
+                                <TextBox Text="{Binding SelectedAlbum.Name, Mode=TwoWay}"
+                                         Watermark="请输入专辑名称"
+                                         Height="40"
+                                         Padding="12,8"
+                                         BorderBrush="#CBD3DC"
+                                         BorderThickness="1"
+                                         CornerRadius="6"
+                                         FontSize="14"/>
+                            </StackPanel>
+
+                            <!-- 歌手 -->
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="歌手 *"
+                                           FontSize="12"
+                                           Foreground="#2C3E50"
+                                           FontWeight="SemiBold"/>
+                                <TextBox Text="{Binding SelectedAlbum.Artist, Mode=TwoWay}"
+                                         Watermark="请输入歌手名称"
+                                         Height="40"
+                                         Padding="12,8"
+                                         BorderBrush="#CBD3DC"
+                                         BorderThickness="1"
+                                         CornerRadius="6"
+                                         FontSize="14"/>
+                            </StackPanel>
+
+                            <!-- 价格 -->
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="价格 *"
+                                           FontSize="12"
+                                           Foreground="#2C3E50"
+                                           FontWeight="SemiBold"/>
+                                <TextBox Text="{Binding SelectedAlbum.Price, Mode=TwoWay}"
+                                         Watermark="0.00"
+                                         Height="40"
+                                         Padding="12,8"
+                                         BorderBrush="#CBD3DC"
+                                         BorderThickness="1"
+                                         CornerRadius="6"
+                                         FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- 歌曲列表卡片 -->
+                <Border Background="#FFFFFF"
+                        CornerRadius="10"
+                        Padding="24"
+                        BorderBrush="#E0E0E0"
+                        BorderThickness="1"
+                        BoxShadow="0 2 8 0 #10000000"
+                        IsVisible="{Binding SelectedAlbum, Converter={x:Static converters:NullToBoolConverter.Instance}}">
+                    <StackPanel Spacing="16">
+                        <!-- 标题和添加按钮 -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                       Text="歌曲列表"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="#2C3E50"
+                                       VerticalAlignment="Center"/>
+                            
+                            <Button Grid.Column="1"
+                                    Content="+ 添加歌曲"
+                                    Command="{Binding AddSongCommand}"
+                                    Width="120"
+                                    Height="36"
+                                    Background="#2ECC71"
+                                    Foreground="White"
+                                    CornerRadius="6"
+                                    FontSize="13"
+                                    FontWeight="SemiBold"/>
+                        </Grid>
+
+                        <!-- 歌曲列表 -->
+                        <ItemsControl ItemsSource="{Binding SelectedAlbum.Songs}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="models:Song">
+                                    <Border Background="#FAFAFA"
+                                            CornerRadius="8"
+                                            Padding="16"
+                                            Margin="0,0,0,12"
+                                            BorderBrush="#E0E0E0"
+                                            BorderThickness="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- 歌曲图标 -->
+                                            <Border Grid.Column="0"
+                                                    Width="40"
+                                                    Height="40"
+                                                    Background="#E3F2FD"
+                                                    CornerRadius="6"
+                                                    VerticalAlignment="Center"
+                                                    Margin="0,0,16,0">
+                                                <TextBlock Text="🎵"
+                                                           FontSize="20"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                            </Border>
+
+                                            <!-- 歌曲信息 -->
+                                            <StackPanel Grid.Column="1" Spacing="12">
+                                                <!-- 第一行：歌曲名称和歌手 -->
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="16"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBox Grid.Column="0"
+                                                             Text="{Binding Title, Mode=TwoWay}"
+                                                             Watermark="歌曲名称 *"
+                                                             Height="38"
+                                                             Padding="10,8"
+                                                             BorderBrush="#CBD3DC"
+                                                             BorderThickness="1"
+                                                             CornerRadius="6"
+                                                             FontSize="13"/>
+
+                                                    <TextBox Grid.Column="2"
+                                                             Text="{Binding Artist, Mode=TwoWay}"
+                                                             Watermark="歌手 *"
+                                                             Height="38"
+                                                             Padding="10,8"
+                                                             BorderBrush="#CBD3DC"
+                                                             BorderThickness="1"
+                                                             CornerRadius="6"
+                                                             FontSize="13"/>
+                                                </Grid>
+
+                                                <!-- 第二行：唱片信息和收藏 -->
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBox Grid.Column="0"
+                                                             Text="{Binding Record, Mode=TwoWay}"
+                                                             Watermark="歌曲信息（可选）"
+                                                             Height="38"
+                                                             Padding="10,8"
+                                                             BorderBrush="#CBD3DC"
+                                                             BorderThickness="1"
+                                                             CornerRadius="6"
+                                                             FontSize="13"
+                                                             Margin="0,0,12,0"/>
+
+                                                    <StackPanel Grid.Column="1"
+                                                                Orientation="Horizontal"
+                                                                VerticalAlignment="Center"
+                                                                Spacing="6">
+                                                        <CheckBox IsChecked="{Binding IsFavorite, Mode=TwoWay}"
+                                                                  VerticalAlignment="Center"/>
+                                                        <TextBlock Text="收藏"
+                                                                   FontSize="13"
+                                                                   Foreground="#7F8C8D"
+                                                                   VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </StackPanel>
+
+                                            <!-- 操作按钮 -->
+                                            <StackPanel Grid.Column="2"
+                                                        Orientation="Horizontal"
+                                                        Spacing="6"
+                                                        VerticalAlignment="Center"
+                                                        Margin="12,0,0,0">
+                                                <Button Content="↑"
+                                                        Width="36"
+                                                        Height="36"
+                                                        Command="{Binding DataContext.MoveSongUpCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        Background="#95A5A6"
+                                                        Foreground="White"
+                                                        CornerRadius="4"
+                                                        FontSize="12"
+                                                        ToolTip.Tip="上移"/>
+                                                
+                                                <Button Content="↓"
+                                                        Width="36"
+                                                        Height="36"
+                                                        Command="{Binding DataContext.MoveSongDownCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}"
+                                                        Background="#95A5A6"
+                                                        Foreground="White"
+                                                        CornerRadius="4"
+                                                        FontSize="12"
+                                                        ToolTip.Tip="下移"/>
+                                                
+                                                <Button Content="删除"
+                                                        Width="70"
+                                                        Height="36"
+                                                        Command="{Binding DataContext.RemoveSongCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding Id}"
+                                                        Background="#E74C3C"
+                                                        Foreground="White"
+                                                        CornerRadius="6"
+                                                        FontSize="13"
+                                                        ToolTip.Tip="删除歌曲"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- 空状态提示 -->
+                        <Border Background="#F8F9FA"
+                                CornerRadius="8"
+                                Padding="24"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                IsVisible="{Binding SelectedAlbum.Songs.Count, Converter={x:Static converters:EmptyToVisibilityConverter.Instance}}">
+                            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                                <TextBlock Text="🎵"
+                                           FontSize="32"
+                                           HorizontalAlignment="Center"
+                                           Opacity="0.3"/>
+                                <TextBlock Text="还没有添加歌曲"
+                                           FontSize="14"
+                                           Foreground="#7F8C8D"
+                                           HorizontalAlignment="Center"/>
+                                <TextBlock Text="点击上方&quot;添加歌曲&quot;按钮添加歌曲"
+                                           FontSize="12"
+                                           Foreground="#95A5A6"
+                                           HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- 底部操作按钮 -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Spacing="8"
+                            IsVisible="{Binding SelectedAlbum, Converter={x:Static converters:NullToBoolConverter.Instance}}">
+                    <Button Content="保存并返回"
+                            Command="{Binding SaveAndBackCommand}"
+                            Width="140"
+                            Height="40"
+                            Background="#3498DB"
+                            Foreground="White"
+                            CornerRadius="6"
+                            FontSize="14"
+                            FontWeight="SemiBold"/>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

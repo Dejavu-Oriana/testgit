@@ -1,0 +1,11 @@
+namespace DailyMusicA.Library.Services;
+
+public interface IContentNavigationService {
+    void NavigateTo(string view, object? parameter = null);
+}
+
+public static class ContentNavigationConstant {
+    public const string TodayDetail = nameof(TodayDetail);
+    public const string AddAlbum = nameof(AddAlbum);
+    public const string AlbumDetail = nameof(AlbumDetail);
+}

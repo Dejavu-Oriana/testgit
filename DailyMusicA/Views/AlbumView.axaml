@@ -1,0 +1,410 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ic="using:Avalonia.Xaml.Interactions.Core"
+             xmlns:vm="using:DailyMusicA.Library.ViewModels"
+             xmlns:models="clr-namespace:DailyMusicA.Library.Models;assembly=DailyMusicA.Library"
+             mc:Ignorable="d"
+             d:DesignWidth="1100"
+             d:DesignHeight="750"
+             x:Class="DailyMusicA.Views.AlbumView"
+             x:DataType="vm:AlbumViewModel">
+
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="AlbumHeroBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1e3a8a" Offset="0"/>
+            <GradientStop Color="#2563eb" Offset="0.7"/>
+            <GradientStop Color="#38bdf8" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="ListBox#QuickFilterListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <Style Selector="ListBox#QuickFilterListBox > ListBoxItem">
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Background" Value="#E2E8F0"/>
+            <Setter Property="Foreground" Value="#1F2937"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="16"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="ListBox#QuickFilterListBox > ListBoxItem:selected">
+            <Setter Property="Background" Value="#475569"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer Background="#F5F7FA"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Margin="16">
+        <StackPanel Spacing="12">
+        <!-- 顶部区域 -->
+        <StackPanel Spacing="12">
+            <!-- Hero - 更紧凑 -->
+            <Border Background="{StaticResource AlbumHeroBrush}"
+                    CornerRadius="12"
+                    Padding="16,12"
+                    BoxShadow="0 4 12 0 #20000000">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="我的专辑库"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="White"/>
+                        <TextBlock Text="{Binding FilterInfo}"
+                                   FontSize="12"
+                                   Foreground="#DBEAFE"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- 控制面板 - 更紧凑 -->
+            <Border Background="#FFFFFF"
+                    CornerRadius="10"
+                    Padding="14"
+                    BorderBrush="#E3E7EF"
+                    BorderThickness="1">
+                <Grid ColumnDefinitions="Auto,*,Auto"
+                      RowDefinitions="Auto"
+                      ColumnSpacing="12">
+                    <!-- 左侧：搜索和筛选 -->
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="0"
+                                Orientation="Horizontal"
+                                Spacing="10"
+                                VerticalAlignment="Center">
+                        <Border Background="#F1F5F9"
+                                CornerRadius="8"
+                                Padding="10,8"
+                                BorderBrush="#E2E8F0"
+                                BorderThickness="1"
+                                VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="8">
+                                <TextBlock Text="🔍"
+                                           FontSize="14"
+                                           VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                                         Watermark="搜索专辑或艺术家..."
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         FontSize="13"
+                                         Width="280"/>
+                            </StackPanel>
+                        </Border>
+                        <ComboBox ItemsSource="{Binding SortOptions}"
+                                  SelectedItem="{Binding SelectedSortOption}"
+                                  BorderBrush="#CBD5F5"
+                                  CornerRadius="8"
+                                  FontSize="13"
+                                  Height="36"
+                                  Width="160"
+                                  VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding QuickFilters}"
+                                  SelectedItem="{Binding SelectedQuickFilter}"
+                                  BorderBrush="#CBD5F5"
+                                  CornerRadius="8"
+                                  FontSize="13"
+                                  Height="36"
+                                  Width="140"
+                                  VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- 中间空白区域 -->
+                    <Border Grid.Row="0" Grid.Column="1"/>
+
+                    <!-- 右侧：操作按钮（更现代样式） -->
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="2"
+                                Orientation="Horizontal"
+                                Spacing="8"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <!-- 刷新按钮：图标+文本，轻量主按钮 -->
+                        <Button Command="{Binding RefreshAlbumsCommand}"
+                                Height="32"
+                                Padding="10,0"
+                                Background="#EEF2FF"
+                                BorderBrush="#CBD5F5"
+                                BorderThickness="1"
+                                Foreground="#1D4ED8"
+                                CornerRadius="16"
+                                FontSize="12">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="⟳" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="刷新" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- 添加专辑：主色圆角按钮 -->
+                        <Button Command="{Binding AddAlbumCommand}"
+                                Height="32"
+                                Padding="12,0"
+                                Background="#2563EB"
+                                Foreground="White"
+                                CornerRadius="16"
+                                FontSize="12">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="＋" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="添加专辑" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- 清空筛选：幽灵按钮 -->
+                        <Button Command="{Binding ClearFilterCommand}"
+                                Height="32"
+                                Padding="10,0"
+                                Background="Transparent"
+                                BorderBrush="#E2E8F0"
+                                BorderThickness="1"
+                                Foreground="#4B5563"
+                                CornerRadius="16"
+                                FontSize="12">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="✕" FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="清空" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- 视图切换：图标分段控制 -->
+                        <Border Background="#F1F5F9"
+                                CornerRadius="16"
+                                BorderBrush="#E2E8F0"
+                                BorderThickness="1"
+                                Padding="2"
+                                Margin="4,0,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="2">
+                                <ToggleButton IsChecked="{Binding IsGridView}"
+                                              Width="32"
+                                              Height="28"
+                                              CornerRadius="14"
+                                              ToolTip.Tip="网格视图">
+                                    <TextBlock Text="▦" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </ToggleButton>
+                                <ToggleButton IsChecked="{Binding IsListView}"
+                                              Width="32"
+                                              Height="28"
+                                              CornerRadius="14"
+                                              ToolTip.Tip="列表视图">
+                                    <TextBlock Text="☰" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </ToggleButton>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <!-- 内容区 -->
+        <Grid VerticalAlignment="Stretch">
+            <ProgressBar IsVisible="{Binding IsLoading}"
+                         IsIndeterminate="True"
+                         Height="3"
+                         Foreground="#667eea"
+                         Margin="0,0,0,8"/>
+
+            <StackPanel Margin="0,12,0,0" Spacing="12">
+                    <!-- 结果提示 - 更紧凑 -->
+                    <Border Background="#FFFFFF"
+                            CornerRadius="8"
+                            Padding="12,8"
+                            BorderBrush="#E3E7EF"
+                            BorderThickness="1">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="10">
+                            <TextBlock Text="📚"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding FilterInfo}"
+                                       FontSize="13"
+                                       Foreground="#7A8194"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 网格视图 -->
+                    <ItemsControl ItemsSource="{Binding FilteredAlbums}"
+                                  IsVisible="{Binding IsGridView}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel ItemWidth="280"
+                                           MinWidth="280"
+                                           Margin="0,0,0,0"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:Album">
+                                <Border Width="260"
+                                        Margin="8"
+                                        Padding="16"
+                                        Background="#FFFFFF"
+                                        CornerRadius="12"
+                                        BorderBrush="#E3E7EF"
+                                        BorderThickness="1"
+                                        BoxShadow="0 10 25 0 #12000000">
+                                    <i:Interaction.Behaviors>
+                                        <ic:EventTriggerBehavior EventName="PointerReleased">
+                                            <ic:InvokeCommandAction Command="{Binding DataContext.ViewAlbumCommand, 
+                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                    CommandParameter="{Binding}"/>
+                                        </ic:EventTriggerBehavior>
+                                    </i:Interaction.Behaviors>
+                                    <StackPanel Spacing="12">
+                                        <!-- 正方形专辑封面 -->
+                                        <Border Width="220"
+                                                Height="220"
+                                                CornerRadius="12"
+                                                Background="#E0E7FF"
+                                                HorizontalAlignment="Center"
+                                                ClipToBounds="True">
+                                            <Image Source="{Binding CoverImage}"
+                                                   Stretch="UniformToFill"/>
+                                        </Border>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="16"
+                                                       FontWeight="Bold"
+                                                       TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Artist}"
+                                                       FontSize="13"
+                                                       Foreground="#7A8090"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="12">
+                                            <Border Background="#EEF2FF"
+                                                    CornerRadius="6"
+                                                    Padding="6,2">
+                                                <TextBlock Text="{Binding Songs.Count, StringFormat='{}{0} 首'}"
+                                                           FontSize="12"
+                                                           Foreground="#4C5BD4"/>
+                                            </Border>
+                                            <Border Background="#F8F9FC"
+                                                    CornerRadius="6"
+                                                    Padding="6,2">
+                                                <TextBlock Text="{Binding AddedDate, StringFormat='{}{0:yyyy-MM-dd}'}"
+                                                           FontSize="12"
+                                                           Foreground="#7A8194"/>
+                                            </Border>
+                                        </StackPanel>
+                                        <Button Content="查看详情"
+                                                Command="{Binding DataContext.ViewAlbumCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Height="34"
+                                                Background="#667eea"
+                                                Foreground="White"
+                                                CornerRadius="8"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- 列表视图 -->
+                    <ItemsControl ItemsSource="{Binding FilteredAlbums}"
+                                  IsVisible="{Binding IsListView}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:Album">
+                                <Border Background="#FFFFFF"
+                                        CornerRadius="10"
+                                        Padding="16"
+                                        Margin="0,0,0,12"
+                                        BorderBrush="#E3E7EF"
+                                        BorderThickness="1">
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <StackPanel Orientation="Horizontal"
+                                                Spacing="12">
+                                        <Border Width="60"
+                                                Height="60"
+                                                CornerRadius="10"
+                                                Background="#EEF2FF">
+                                            <Image Source="{Binding CoverImage}"
+                                                   Stretch="UniformToFill"/>
+                                        </Border>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding Artist}"
+                                                       FontSize="13"
+                                                       Foreground="#7A8090"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1"
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                Spacing="16">
+                                        <TextBlock Text="{Binding Songs.Count, StringFormat='歌曲 {0} 首'}"
+                                                   Foreground="#7A8194"/>
+                                        <TextBlock Text="{Binding AddedDate, StringFormat='添加于 {0:yyyy-MM-dd}'}"
+                                                   Foreground="#7A8194"/>
+                                        <TextBlock Text="{Binding Price, StringFormat='¥{0:F2}'}"
+                                                   Foreground="#4C5BD4"/>
+                                    </StackPanel>
+                                    <Button Grid.Column="2"
+                                            Content="详情"
+                                            Command="{Binding DataContext.ViewAlbumCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}"
+                                            Width="80"
+                                            Height="34"
+                                            Background="#3498DB"
+                                            Foreground="White"
+                                            CornerRadius="8"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- 空状态 -->
+                    <Border Background="#FFFFFF"
+                            CornerRadius="12"
+                            Padding="40"
+                            BorderBrush="#E3E7EF"
+                            BorderThickness="1"
+                            IsVisible="{Binding IsEmpty}">
+                        <StackPanel Spacing="12"
+                                    HorizontalAlignment="Center">
+                            <TextBlock Text="🧐"
+                                       FontSize="42"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="没有符合条件的专辑"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="请尝试调整筛选条件或添加新的专辑。"
+                                       FontSize="14"
+                                       Foreground="#7A8194"
+                                       HorizontalAlignment="Center"/>
+                            <Button Content="重置筛选"
+                                    Command="{Binding ClearFilterCommand}"
+                                    Width="120"
+                                    Height="36"
+                                    Background="#667eea"
+                                    Foreground="White"
+                                    CornerRadius="8"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+        </Grid>
+    </StackPanel>
+</ScrollViewer>
+</UserControl>
